@@ -1,10 +1,10 @@
 import Display from "./Display";
-import Search from "./Search";
+import SearchSection from "./SearchSection";
 
 const Home = () => {
   return (
     <div className="flex flex-row w-full h-full">
-      <Search />
+      <SearchSection />
 
       <Display />
     </div>
