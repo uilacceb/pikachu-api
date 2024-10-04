@@ -5,11 +5,16 @@ export const PokemonContext = createContext();
 
 function App() {
   const [pokemonURL, setPokemonURL] = useState("");
-  const [pokemonName, setPokemonName] = useState("");
+  const [userInput, setUserInput] = useState("");
 
   return (
     <PokemonContext.Provider
-      value={{ pokemonURL, setPokemonURL, pokemonName, setPokemonName }}
+      value={{
+        pokemonURL,
+        setPokemonURL,
+        userInput,
+        setUserInput,
+      }}
     >
       <div className="w-screen h-screen">
         <Home />
