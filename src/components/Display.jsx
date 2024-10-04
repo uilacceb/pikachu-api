@@ -3,11 +3,18 @@ import { PokemonContext } from "../App";
 import NotFoundImg from "../assets/notFound.png";
 
 const Display = () => {
-  const { pokemonURL, notFound } = useContext(PokemonContext);
+  const { pokemonURL, notFound, error } = useContext(PokemonContext);
   return (
-    <div className=" h-full bg-[#191300] grow-[2] flex justify-center items-center">
-      {notFound ? <img src={NotFoundImg} /> : <img src={pokemonURL} />}
-    </div>
+    <>
+      <div>
+        {error && (
+          <p className="text-white font-semibold text-center text-2xl">
+            {error}
+          </p>
+        )}
+        {notFound ? <img src={NotFoundImg} /> : <img src={pokemonURL} />}
+      </div>
+    </>
   );
 };
 

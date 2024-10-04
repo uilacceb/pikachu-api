@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 
 const Search = () => {
-  const { setPokemonURL, userInput, setUserInput, setNotFound } =
+  const { setPokemonURL, userInput, setUserInput, setNotFound, setError } =
     useContext(PokemonContext);
-  const [error, setError] = useState("");
 
   const fetchPokemon = async (name) => {
     setPokemonURL("");
@@ -51,7 +50,6 @@ const Search = () => {
             <img src={Ball} className="h-10 w-10" />
           </button>
         </div>
-        {error && <p className="text-white font-semibold">{error}</p>}
       </div>
     </>
   );

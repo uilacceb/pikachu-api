@@ -7,6 +7,7 @@ function App() {
   const [pokemonURL, setPokemonURL] = useState("");
   const [userInput, setUserInput] = useState("");
   const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState("");
 
   return (
     <PokemonContext.Provider
@@ -17,6 +18,8 @@ function App() {
         setUserInput,
         notFound,
         setNotFound,
+        error,
+        setError,
       }}
     >
       <div className="w-screen h-screen">
