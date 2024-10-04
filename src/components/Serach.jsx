@@ -1,42 +1,59 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 
 const Search = () => {
-  const { setPokemonURL, userInput, setUserInput } = useContext(PokemonContext);
+  const { setPokemonURL, userInput, setUserInput, setNotFound } =
+    useContext(PokemonContext);
+  const [error, setError] = useState("");
 
   const fetchPokemon = async (name) => {
+    setPokemonURL("");
+    setNotFound(false);
     try {
       if (!name) {
-        console.log("please enter a Pokemon name");
+        setError("Please enter a Pokémon name.");
         return;
       }
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
-      if (response.ok) {
-        const data = await response.json();
-        setPokemonURL(data.sprites.other["official-artwork"].front_default);
-      } else {
-        throw new Error("Pokemon not found");
+      const response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${name.toLowerCase()}`
+      );
+      if (!response.ok) {
+        setNotFound(true);
+        throw new Error("Pokémon not found");
       }
+      const data = await response.json();
+      setPokemonURL(data.sprites.other["official-artwork"].front_default);
+      setError("");
     } catch (error) {
-      console.log("Failed to fetch", error);
+      setError(error.message || "An error occurred. Please try again.");
     }
   };
+
   return (
-    <div className="flex justify-center items-center">
-      <input
-        className="h-10 rounded-md text-[20px] font-Inter font-semibold px-2 mr-4 focus:outline-none"
-        type="text"
-        value={userInput}
-        onChange={(e) => {
-          setUserInput(e.target.value);
-          console.log(e.target.value);
-        }}
-      />
-      <button onClick={() => fetchPokemon(userInput)}>
-        <img src={Ball} className="h-10 w-10" />
-      </button>
-    </div>
+    <>
+      <div>
+        <div className="flex justify-center items-center">
+          <input
+            className="h-10 rounded-md text-[20px] font-Inter font-semibold px-2 mr-4 focus:outline-none"
+            type="text"
+            value={userInput}
+            onChange={(e) => {
+              setUserInput(e.target.value);
+              setError("");
+              console.log(e.target.value);
+            }}
+            onKeyDown={(e) => {
+              e.key === "Enter" && fetchPokemon(userInput);
+            }}
+          />
+          <button onClick={() => fetchPokemon(userInput)}>
+            <img src={Ball} className="h-10 w-10" />
+          </button>
+        </div>
+        {error && <p className="text-white font-semibold">{error}</p>}
+      </div>
+    </>
   );
 };
 

@@ -3,9 +3,8 @@ import SearchSection from "./SearchSection";
 
 const Home = () => {
   return (
-    <div className="flex flex-row w-full h-full">
+    <div className="flex flex-row  h-full">
       <SearchSection />
-
       <Display />
     </div>
   );
