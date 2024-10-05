@@ -5,8 +5,14 @@ import { fetchAllPokemon } from "../allPokemon";
 import { customStyles } from "../constants/selectStyle";
 
 const Search = () => {
-  const { setPokemonURL, setNotFound, setError, setType, setPokemonName } =
-    useContext(PokemonContext);
+  const {
+    setPokemonURL,
+    setNotFound,
+    setError,
+    setType,
+    setPokemonName,
+    setSearchNumber,
+  } = useContext(PokemonContext);
 
   // State to store options for react-select
   const [options, setOptions] = useState([]);
@@ -73,8 +79,8 @@ const Search = () => {
 
   return (
     <div>
-      <p className="font-bold pb-2 text-center">
-        Search or type Pokémon by name:
+      <p className="font-bold pb-2 text-center text-[20px]">
+        Select Pokémon by name:
       </p>
 
       <Select
@@ -89,6 +95,15 @@ const Search = () => {
         loadingMessage={() => "Loading Pokémon..."}
         isClearable={true}
       />
+      <p className="font-bold pb-2 mt-10 text-center text-[20px]">or</p>
+      <div className="text-center">
+        <button
+          onClick={() => setSearchNumber(true)}
+          className="bg-[#676767] px-2 py-2 rounded-xl font-Inter font-semibold text-white"
+        >
+          Search By Number
+        </button>
+      </div>
     </div>
   );
 };
