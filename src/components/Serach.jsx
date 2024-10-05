@@ -3,8 +3,14 @@ import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 
 const Search = () => {
-  const { setPokemonURL, userInput, setUserInput, setNotFound, setError } =
-    useContext(PokemonContext);
+  const {
+    setPokemonURL,
+    userInput,
+    setUserInput,
+    setNotFound,
+    setError,
+    setType,
+  } = useContext(PokemonContext);
 
   const fetchPokemon = async (name) => {
     setPokemonURL("");
@@ -23,6 +29,7 @@ const Search = () => {
       }
       const data = await response.json();
       setPokemonURL(data.sprites.other["official-artwork"].front_default);
+      setType(data.types[0].type.name);
       setError("");
     } catch (error) {
       setError(error.message || "An error occurred. Please try again.");
@@ -40,8 +47,8 @@ const Search = () => {
             onChange={(e) => {
               setUserInput(e.target.value);
               setError("");
-              console.log(e.target.value);
             }}
+            placeholder="eg. pikachu"
             onKeyDown={(e) => {
               e.key === "Enter" && fetchPokemon(userInput);
             }}

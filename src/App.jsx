@@ -7,6 +7,7 @@ function App() {
   const [pokemonURL, setPokemonURL] = useState("");
   const [userInput, setUserInput] = useState("");
   const [notFound, setNotFound] = useState(false);
+  const [type, setType] = useState("ice");
   const [error, setError] = useState("");
 
   return (
@@ -20,6 +21,8 @@ function App() {
         setNotFound,
         error,
         setError,
+        type,
+        setType,
       }}
     >
       <div className="w-screen h-screen">
