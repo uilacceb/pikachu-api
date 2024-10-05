@@ -5,7 +5,7 @@ import { fetchAllPokemon } from "../allPokemon";
 import { customStyles } from "../constants/selectStyle";
 
 const Search = () => {
-  const { setPokemonURL, setNotFound, setError, setType } =
+  const { setPokemonURL, setNotFound, setError, setType, setPokemonName } =
     useContext(PokemonContext);
 
   // State to store options for react-select
@@ -43,6 +43,7 @@ const Search = () => {
       }
       const data = await response.json();
       setPokemonURL(data.sprites.other["official-artwork"].front_default);
+      setPokemonName(data.name);
       setType(data.types[0].type.name);
       setError("");
     } catch (error) {

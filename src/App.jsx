@@ -9,6 +9,7 @@ function App() {
   const [notFound, setNotFound] = useState(false);
   const [type, setType] = useState("electric");
   const [error, setError] = useState("");
+  const [pokemonName, setPokemonName] = useState("");
 
   return (
     <PokemonContext.Provider
@@ -23,6 +24,8 @@ function App() {
         setError,
         type,
         setType,
+        pokemonName,
+        setPokemonName,
       }}
     >
       <div className="w-screen h-screen">
