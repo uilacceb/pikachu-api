@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import Home from "./components/home";
+import Home from "./components/Home";
 
 export const PokemonContext = createContext();
 
