@@ -3,7 +3,7 @@ import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 import Select from "react-select";
 import { fetchAllPokemon } from "../allPokemon";
-
+import { customStyles } from "../constants/selectStyle";
 const Search = () => {
   const {
     setPokemonURL,
@@ -16,7 +16,6 @@ const Search = () => {
 
   // State to store options for react-select
   const [options, setOptions] = useState([]);
-
   // Fetch all Pokémon on component mount
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +26,8 @@ const Search = () => {
       }));
       setOptions(pokemonOptions); // Set options for the select component
     };
-
     fetchData();
-  }, []); // Empty dependency array to run only on mount
-
+  }, []);
   const fetchPokemon = async (name) => {
     setPokemonURL("");
     setNotFound(false);
@@ -58,9 +55,11 @@ const Search = () => {
   return (
     <>
       <div>
-        <p className="font-bold pb-2">Search Pokémon by name or number:</p>
+        <p className="font-bold pb-2">
+          Search or type Pokémon by name or number:
+        </p>
         <div className="flex justify-center items-center">
-          <input
+          {/* <input
             className="rounded-md text-[20px] font-Inter font-semibold px-2 h-[50px] mr-4 focus:outline-none"
             type="search"
             value={userInput}
@@ -72,20 +71,23 @@ const Search = () => {
             onKeyDown={(e) => {
               e.key === "Enter" && fetchPokemon(userInput);
             }}
-          />
-          <button onClick={() => fetchPokemon(userInput)}>
+          /> */}
+          {/* <button onClick={() => fetchPokemon(userInput)}>
             <img src={Ball} className="h-10 w-10" />
-          </button>
+          </button> */}
         </div>
-
         {/* Select dropdown for choosing Pokémon */}
         <Select
+          styles={customStyles}
           options={options}
           onChange={(selectedOption) => fetchPokemon(selectedOption.value)}
+          placeholder="e.g Pikachu"
+          noOptionsMessage={() => "No Pokemon found!"}
+          loadingMessage={() => "Loading Pokémon..."}
+          isClearable={true}
         />
       </div>
     </>
   );
 };
-
 export default Search;
