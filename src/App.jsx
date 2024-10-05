@@ -7,7 +7,7 @@ function App() {
   const [pokemonURL, setPokemonURL] = useState("");
   const [userInput, setUserInput] = useState("");
   const [notFound, setNotFound] = useState(false);
-  const [type, setType] = useState("ice");
+  const [type, setType] = useState("electric");
   const [error, setError] = useState("");
 
   return (

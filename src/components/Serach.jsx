@@ -39,9 +39,10 @@ const Search = () => {
   return (
     <>
       <div>
+        <p className="font-bold pb-2">Search Pokemon by name or number:</p>
         <div className="flex justify-center items-center">
           <input
-            className="h-10 rounded-md text-[20px] font-Inter font-semibold px-2 mr-4 focus:outline-none"
+            className=" rounded-md text-[20px] font-Inter font-semibold px-2 h-[50px] mr-4 focus:outline-none"
             type="text"
             value={userInput}
             onChange={(e) => {

@@ -48,7 +48,7 @@ const PokemonTypeColor = [
     fairy: "#c16873",
   },
   {
-    water: "#7396f9",
+    water: "#7e8ecc",
   },
   {
     ice: "#8cb3ba",
