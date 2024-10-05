@@ -1,6 +1,8 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
+import Select from "react-select";
+import { fetchAllPokemon } from "../allPokemon";
 
 const Search = () => {
   const {
@@ -11,6 +13,23 @@ const Search = () => {
     setError,
     setType,
   } = useContext(PokemonContext);
+
+  // State to store options for react-select
+  const [options, setOptions] = useState([]);
+
+  // Fetch all Pokémon on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      const allPokemon = await fetchAllPokemon();
+      const pokemonOptions = allPokemon.map((pokemon) => ({
+        value: pokemon,
+        label: pokemon,
+      }));
+      setOptions(pokemonOptions); // Set options for the select component
+    };
+
+    fetchData();
+  }, []); // Empty dependency array to run only on mount
 
   const fetchPokemon = async (name) => {
     setPokemonURL("");
@@ -39,11 +58,11 @@ const Search = () => {
   return (
     <>
       <div>
-        <p className="font-bold pb-2">Search Pokemon by name or number:</p>
+        <p className="font-bold pb-2">Search Pokémon by name or number:</p>
         <div className="flex justify-center items-center">
           <input
-            className=" rounded-md text-[20px] font-Inter font-semibold px-2 h-[50px] mr-4 focus:outline-none"
-            type="text"
+            className="rounded-md text-[20px] font-Inter font-semibold px-2 h-[50px] mr-4 focus:outline-none"
+            type="search"
             value={userInput}
             onChange={(e) => {
               setUserInput(e.target.value);
@@ -58,6 +77,12 @@ const Search = () => {
             <img src={Ball} className="h-10 w-10" />
           </button>
         </div>
+
+        {/* Select dropdown for choosing Pokémon */}
+        <Select
+          options={options}
+          onChange={(selectedOption) => fetchPokemon(selectedOption.value)}
+        />
       </div>
     </>
   );
