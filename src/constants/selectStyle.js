@@ -6,29 +6,27 @@ export const customStyles = {
     padding: "5px",
     fontWeight: 600,
     fontSize: "20px",
+    width: "350px",
   }),
   menu: (provided) => ({
     ...provided,
     borderRadius: "10px",
     border: "1px solid #4CAF50",
+    width: "350px",
   }),
   option: (provided, state) => ({
     ...provided,
     backgroundColor: state.isSelected
-      ? "#3D3D3D" // Background color when selected
+      ? "#3D3D3D"
       : state.isFocused
-      ? "#ADADAD" // Background color when focused (highlighted by arrow keys)
-      : "white", // Default background color
-    color: state.isSelected
-      ? "white" // Text color when selected
-      : state.isFocused
-      ? "white" // Text color when focused
-      : "black", // Default text color
+      ? "#ADADAD"
+      : "white",
+    color: state.isSelected ? "white" : state.isFocused ? "white" : "black",
     padding: 10,
     fontWeight: state.isSelected ? "bold" : 500,
     fontSize: "20px",
     "&:hover": {
-      backgroundColor: "#ADADAD", // Hover color
+      backgroundColor: "#ADADAD",
       color: "white",
     },
   }),

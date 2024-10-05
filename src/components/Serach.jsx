@@ -1,21 +1,18 @@
 import { useContext, useEffect, useState } from "react";
-import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 import Select from "react-select";
 import { fetchAllPokemon } from "../allPokemon";
 import { customStyles } from "../constants/selectStyle";
+
 const Search = () => {
-  const {
-    setPokemonURL,
-    userInput,
-    setUserInput,
-    setNotFound,
-    setError,
-    setType,
-  } = useContext(PokemonContext);
+  const { setPokemonURL, setNotFound, setError, setType } =
+    useContext(PokemonContext);
 
   // State to store options for react-select
   const [options, setOptions] = useState([]);
+  const [inputValue, setInputValue] = useState(""); // Store the input value
+  const [selectedOption, setSelectedOption] = useState(null); // Store the selected option
+
   // Fetch all Pokémon on component mount
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +25,7 @@ const Search = () => {
     };
     fetchData();
   }, []);
+
   const fetchPokemon = async (name) => {
     setPokemonURL("");
     setNotFound(false);
@@ -52,42 +50,46 @@ const Search = () => {
     }
   };
 
+  // Handle input change (what the user types)
+  const handleInputChange = (newValue, { action }) => {
+    if (action === "input-change") {
+      setInputValue(newValue); // Update input value with what the user types
+      setSelectedOption(null); // Clear selected option when user types
+    }
+  };
+
+  // Handle selection from dropdown
+  const handleChange = (option) => {
+    if (option) {
+      setSelectedOption(option); // Store selected option
+      setInputValue(option.label); // Update input value to selected option's label
+      fetchPokemon(option.value); // Fetch Pokémon based on selection
+    } else {
+      setSelectedOption(null);
+      setInputValue(""); // Clear input value if the option is cleared
+    }
+  };
+
   return (
-    <>
-      <div>
-        <p className="font-bold pb-2">
-          Search or type Pokémon by name or number:
-        </p>
-        <div className="flex justify-center items-center">
-          {/* <input
-            className="rounded-md text-[20px] font-Inter font-semibold px-2 h-[50px] mr-4 focus:outline-none"
-            type="search"
-            value={userInput}
-            onChange={(e) => {
-              setUserInput(e.target.value);
-              setError("");
-            }}
-            placeholder="eg. pikachu"
-            onKeyDown={(e) => {
-              e.key === "Enter" && fetchPokemon(userInput);
-            }}
-          /> */}
-          {/* <button onClick={() => fetchPokemon(userInput)}>
-            <img src={Ball} className="h-10 w-10" />
-          </button> */}
-        </div>
-        {/* Select dropdown for choosing Pokémon */}
-        <Select
-          styles={customStyles}
-          options={options}
-          onChange={(selectedOption) => fetchPokemon(selectedOption.value)}
-          placeholder="e.g Pikachu"
-          noOptionsMessage={() => "No Pokemon found!"}
-          loadingMessage={() => "Loading Pokémon..."}
-          isClearable={true}
-        />
-      </div>
-    </>
+    <div>
+      <p className="font-bold pb-2 text-center">
+        Search or type Pokémon by name:
+      </p>
+
+      <Select
+        styles={customStyles}
+        options={options}
+        inputValue={inputValue} // Use inputValue directly
+        onInputChange={handleInputChange} // Handle manual typing
+        value={selectedOption}
+        onChange={handleChange} // Handle option selection
+        placeholder="e.g Pikachu"
+        noOptionsMessage={() => "No Pokémon found!"}
+        loadingMessage={() => "Loading Pokémon..."}
+        isClearable={true}
+      />
+    </div>
   );
 };
+
 export default Search;
