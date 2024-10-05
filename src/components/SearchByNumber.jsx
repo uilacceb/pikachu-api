@@ -12,9 +12,12 @@ const SearchByNumber = () => {
     setType,
     setSearchNumber,
     setPokemonName,
+    setIsLoading,
   } = useContext(PokemonContext);
 
   const fetchPokemon = async (name) => {
+    setPokemonName("");
+    setIsLoading(true);
     setPokemonURL("");
     setNotFound(false);
     try {
@@ -36,18 +39,20 @@ const SearchByNumber = () => {
       setError("");
     } catch (error) {
       setError(error.message || "An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
     <>
       <div>
-      <p className="font-bold pb-5 text-center text-[20px] w-[400px]">
-         Search Pokémon by number or name:
-      </p>
+        <p className="font-bold pb-5 text-center text-[20px] w-[400px]">
+          Search Pokémon by number or name:
+        </p>
         <div className="flex justify-center items-center">
           <input
-            className="h-10 rounded-md text-[20px] font-Inter font-semibold px-2 mr-4 focus:outline-none"
+            className="h-[54px] rounded-md text-[20px] font-Inter font-semibold px-3  mr-4 focus:outline-none"
             type="text"
             value={userInput}
             onChange={(e) => {

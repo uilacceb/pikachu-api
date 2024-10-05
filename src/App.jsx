@@ -13,6 +13,7 @@ function App() {
   const [error, setError] = useState("");
   const [pokemonName, setPokemonName] = useState("");
   const [searchNumber, setSearchNumber] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <PokemonContext.Provider
@@ -31,6 +32,8 @@ function App() {
         setPokemonName,
         searchNumber,
         setSearchNumber,
+        isLoading,
+        setIsLoading,
       }}
     >
       <div className="w-screen h-screen">

@@ -12,6 +12,7 @@ const Search = () => {
     setType,
     setPokemonName,
     setSearchNumber,
+    setIsLoading,
   } = useContext(PokemonContext);
 
   // State to store options for react-select
@@ -33,8 +34,10 @@ const Search = () => {
   }, []);
 
   const fetchPokemon = async (name) => {
+    setIsLoading(true);
     setPokemonURL("");
     setNotFound(false);
+    setPokemonName("");
     try {
       if (!name) {
         setError("Please enter a Pokémon name.");
@@ -54,6 +57,8 @@ const Search = () => {
       setError("");
     } catch (error) {
       setError(error.message || "An error occurred. Please try again.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
