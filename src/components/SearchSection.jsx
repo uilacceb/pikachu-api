@@ -11,7 +11,7 @@ const SearchSection = () => {
   return (
     <div
       style={{ backgroundColor: serachedTypeColor[type] }}
-      className={`h-full w-[700px] flex justify-center items-center`}
+      className={`pt-7 h-screen justify-center items-center lg:h-full lg:w-[700px] flex  `}
     >
       {searchNumber ? <SearchByNumber /> : <Search />}
     </div>

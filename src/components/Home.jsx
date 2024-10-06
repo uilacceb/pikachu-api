@@ -3,7 +3,7 @@ import SearchSection from "./SearchSection";
 
 const Home = () => {
   return (
-    <div className="flex flex-row  h-full">
+    <div className="lg:flex lg:flex-row lg:h-full flex flex-col">
       <SearchSection />
       <DisplaySection />
     </div>

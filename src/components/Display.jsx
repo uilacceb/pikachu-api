@@ -15,13 +15,13 @@ const Display = () => {
         {error ? (
           <p
             style={textStyle}
-            className="text-white font-semibold text-center text-6xl"
+            className="text-white font-semibold text-center lg:text-6xl text-3xl"
           >
             {error}
           </p>
         ) : (
           <p
-            className="text-white font-semibold text-center text-8xl tracking-wider opacity-0.5 font-Inter capitalize"
+            className="text-white font-semibold text-center lg:text-8xl text-4xl tracking-wider opacity-0.5 font-Inter capitalize pb-6"
             style={textStyle}
           >
             {pokemonName}
@@ -51,7 +51,7 @@ const Display = () => {
           </div>
         ) : (
           <img
-            className="w-[500px] h-[500px]"
+            className="lg:w-[500px] lg:h-[500px] h-[250px] w-[250px]"
             src={pokemonURL}
             alt={pokemonName}
           />
