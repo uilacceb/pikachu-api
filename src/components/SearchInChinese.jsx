@@ -62,6 +62,7 @@ const SearchInChinese = () => {
         value={selectedOption}
         onChange={handleChange}
         placeholder="例如: 皮卡丘"
+        isClearable={true}
       />
       <p className="font-bold pb-2 mt-10 text-center text-[20px]">或者</p>
       <div className="text-center">
