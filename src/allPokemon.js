@@ -24,3 +24,4 @@ export const fetchAllPokemon = async () => {
   console.log(pokemonNames);
   return pokemonNames;
 };
+

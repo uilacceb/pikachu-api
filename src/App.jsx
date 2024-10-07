@@ -14,6 +14,7 @@ function App() {
   const [pokemonName, setPokemonName] = useState("");
   const [searchNumber, setSearchNumber] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [chineseVersion, setChineseVersion] = useState(false);
 
   return (
     <PokemonContext.Provider
@@ -34,6 +35,8 @@ function App() {
         setSearchNumber,
         isLoading,
         setIsLoading,
+        chineseVersion,
+        setChineseVersion,
       }}
     >
       <div className="w-screen h-screen">
