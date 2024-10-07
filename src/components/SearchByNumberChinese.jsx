@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
-import pokemon from "pokemon";
-
+import pokemonData from "pokemon/data/zh-hant.json";
 
 const SearchByNumberChinese = () => {
   const {
@@ -23,18 +22,21 @@ const SearchByNumberChinese = () => {
     setPokemonURL("");
     setNotFound(false);
     try {
-      if (!id) {
+      const numericId = Number(id); // Convert id to a number
+      if (!numericId) {
         setError("請輸入pokemon的編號");
         return;
       }
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
+
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${numericId}`);
       if (!response.ok) {
         setNotFound(true);
         throw new Error("找不到這個Pokemon");
       }
+
       const data = await response.json();
       setPokemonURL(data.sprites.other["official-artwork"].front_default);
-      setPokemonName(pokemon.getName(id, "zh-Hant"));
+      setPokemonName(pokemonData[numericId - 1]); // Access name correctly with `id - 1`
       setType(data.types[0].type.name);
       setError("");
     } catch (error) {
