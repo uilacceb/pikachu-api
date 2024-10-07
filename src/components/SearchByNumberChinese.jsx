@@ -3,6 +3,7 @@ import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 import pokemon from "pokemon";
 
+
 const SearchByNumberChinese = () => {
   const {
     setPokemonURL,

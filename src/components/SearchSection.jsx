@@ -20,18 +20,16 @@ const SearchSection = () => {
                   lg:absolute lg:top-5 lg:right-5"
       >
         <span
-          className={`font-semibold cursor-pointer hover:text-white ${
-            !chineseVersion ? "text-white font-bold" : ""
-          }`}
+          className={`font-semibold cursor-pointer hover:text-white ${!chineseVersion ? "text-white font-bold" : ""
+            }`}
           onClick={() => setChineseVersion(false)}
         >
           EN&nbsp;
         </span>{" "}
         |{" "}
         <span
-          className={`font-semibold cursor-pointer hover:text-white ${
-            chineseVersion ? "text-white font-bold" : ""
-          }`}
+          className={`font-semibold cursor-pointer hover:text-white ${chineseVersion ? "text-white font-bold" : ""
+            }`}
           onClick={() => setChineseVersion(true)}
         >
           &nbsp;中文
