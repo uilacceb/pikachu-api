@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
+import NotFound from "../assets/notFound.png"
 
 const SearchByNumber = () => {
   const {
@@ -23,6 +24,7 @@ const SearchByNumber = () => {
     try {
       if (!name) {
         setError("Please enter a Pokémon name.");
+        setPokemonURL(NotFound)
         return;
       }
       const response = await fetch(
@@ -59,7 +61,7 @@ const SearchByNumber = () => {
               setUserInput(e.target.value);
               setError("");
             }}
-            placeholder="eg. pikachu"
+            placeholder="eg. 25"
             onKeyDown={(e) => {
               e.key === "Enter" && fetchPokemon(userInput);
             }}

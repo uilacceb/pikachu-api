@@ -2,6 +2,7 @@ import { useContext } from "react";
 import Ball from "../assets/game.png";
 import { PokemonContext } from "../App";
 import pokemonData from "pokemon/data/zh-hant.json";
+import NotFound from "../assets/notFound.png"
 
 const SearchByNumberChinese = () => {
   const {
@@ -24,7 +25,8 @@ const SearchByNumberChinese = () => {
     try {
       const numericId = Number(id); // Convert id to a number
       if (!numericId) {
-        setError("請輸入pokemon的編號");
+        setError("請輸入編號!");
+        setPokemonURL(NotFound)
         return;
       }
 
