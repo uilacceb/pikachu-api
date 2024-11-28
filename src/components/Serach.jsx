@@ -13,25 +13,27 @@ const Search = () => {
     setPokemonName,
     setSearchNumber,
     setIsLoading,
+    loadPokemonList,
+    setLoadPokemonList
   } = useContext(PokemonContext);
 
-  // State to store options for react-select
   const [options, setOptions] = useState([]);
-  const [inputValue, setInputValue] = useState(""); // Store the input value
-  const [selectedOption, setSelectedOption] = useState(null); // Store the selected option
+  const [inputValue, setInputValue] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
 
-  // Fetch all Pokémon on component mount
   useEffect(() => {
     const fetchData = async () => {
+      setLoadPokemonList(true);
       const allPokemon = await fetchAllPokemon();
       const pokemonOptions = allPokemon.map((pokemon) => ({
         value: pokemon,
         label: pokemon,
       }));
-      setOptions(pokemonOptions); // Set options for the select component
+      setOptions(pokemonOptions);
+      setLoadPokemonList(false);
     };
     fetchData();
-  }, []);
+  }, [setLoadPokemonList]);
 
   const fetchPokemon = async (name) => {
     setIsLoading(true);
@@ -62,23 +64,21 @@ const Search = () => {
     }
   };
 
-  // Handle input change (what the user types)
   const handleInputChange = (newValue, { action }) => {
     if (action === "input-change") {
-      setInputValue(newValue); // Update input value with what the user types
-      setSelectedOption(null); // Clear selected option when user types
+      setInputValue(newValue);
+      setSelectedOption(null);
     }
   };
 
-  // Handle selection from dropdown
   const handleChange = (option) => {
     if (option) {
-      setSelectedOption(option); // Store selected option
-      setInputValue(option.label); // Update input value to selected option's label
-      fetchPokemon(option.value); // Fetch Pokémon based on selection
+      setSelectedOption(option);
+      setInputValue(option.label);
+      fetchPokemon(option.value);
     } else {
       setSelectedOption(null);
-      setInputValue(""); // Clear input value if the option is cleared
+      setInputValue("");
     }
   };
 
@@ -91,13 +91,18 @@ const Search = () => {
       <Select
         styles={customStyles}
         options={options}
-        inputValue={inputValue} // Use inputValue directly
-        onInputChange={handleInputChange} // Handle manual typing
+        inputValue={inputValue}
+        onInputChange={handleInputChange}
         value={selectedOption}
-        onChange={handleChange} // Handle option selection
+        onChange={handleChange}
         placeholder="e.g Pikachu"
-        noOptionsMessage={() => "No Pokémon found!"}
+        isLoading={loadPokemonList}
         loadingMessage={() => "Loading Pokémon..."}
+        noOptionsMessage={() => 
+          loadPokemonList 
+            ? "Loading Pokémon..." 
+            : "No Pokémon found!"
+        }
         isClearable={true}
       />
       <p className="font-bold pb-2 mt-10 text-center text-[20px]">or</p>

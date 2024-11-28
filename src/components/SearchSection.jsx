@@ -25,8 +25,8 @@ const SearchSection = () => {
           onClick={() => setChineseVersion(false)}
         >
           EN&nbsp;
-        </span>{" "}
-        |{" "}
+        </span>
+        |
         <span
           className={`font-semibold cursor-pointer hover:text-white ${chineseVersion ? "text-white font-bold" : ""
             }`}
