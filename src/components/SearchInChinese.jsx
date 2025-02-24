@@ -32,12 +32,12 @@ const SearchInChinese = () => {
     }
   };
 
-  const handleInputChange = (newValue, { action }) => {
-    if (action === "input-change") {
-      setInputValue(newValue);
-      setSelectedOption(null);
-    }
-  };
+  // const handleInputChange = (newValue, { action }) => {
+  //   if (action === "input-change") {
+  //     setInputValue(newValue);
+  //     setSelectedOption(null);
+  //   }
+  // };
 
   const handleChange = (option) => {
     if (option) {
@@ -57,8 +57,8 @@ const SearchInChinese = () => {
       <Select
         styles={customStyles}
         options={options}
-        inputValue={inputValue}
-        onInputChange={handleInputChange}
+        // inputValue={inputValue}
+        // onInputChange={handleInputChange}
         value={selectedOption}
         onChange={handleChange}
         placeholder="例如: 皮卡丘"

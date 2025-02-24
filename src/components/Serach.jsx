@@ -64,12 +64,12 @@ const Search = () => {
     }
   };
 
-  const handleInputChange = (newValue, { action }) => {
-    if (action === "input-change") {
-      setInputValue(newValue);
-      setSelectedOption(null);
-    }
-  };
+  // const handleInputChange = (newValue, { action }) => {
+  //   if (action === "input-change") {
+  //     setInputValue(newValue);
+  //     setSelectedOption(null);
+  //   }
+  // };
 
   const handleChange = (option) => {
     if (option) {
@@ -77,7 +77,7 @@ const Search = () => {
       setInputValue(option.label);
       fetchPokemon(option.value);
     } else {
-      setSelectedOption(null);
+      setSelectedOption();
       setInputValue("");
     }
   };
@@ -91,8 +91,8 @@ const Search = () => {
       <Select
         styles={customStyles}
         options={options}
-        inputValue={inputValue}
-        onInputChange={handleInputChange}
+        // inputValue={inputValue}
+        // onInputChange={handleInputChange}
         value={selectedOption}
         onChange={handleChange}
         placeholder="e.g Pikachu"
