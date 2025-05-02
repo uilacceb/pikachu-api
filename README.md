@@ -42,7 +42,7 @@ https://pikachu-api.vercel.app/
 
 ### API Integration
 The application connects to the PokeAPI to fetch Pokemon data, including:
-- Names (in multiple languages)
+- Names
 - Official artwork
 
 ## Author
